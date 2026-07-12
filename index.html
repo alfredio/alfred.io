@@ -1,0 +1,227 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Alfred</title>
+<meta name="description" content="Alfred — personal site. Something new is nearly within reach." />
+
+<!-- Social preview. Swap the domain for your own once deployed. -->
+<meta property="og:title" content="Alfred" />
+<meta property="og:description" content="Something new is nearly within reach." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://alfred.io/assets/og.png" />
+<meta name="theme-color" content="#ece0c4" />
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;700;900&display=swap"
+  rel="stylesheet"
+/>
+<link rel="stylesheet" href="style.css" />
+
+<main class="poster">
+  <header class="meta">
+    <span class="meta__year">MMXXVI</span>
+  </header>
+
+  <h1 class="wordmark">Alfred</h1>
+
+  <figure class="art">
+    <!-- Cubist "Creation" — a hand reaching toward the machine. Inlined so the
+         continuous motion (hand drifts toward the screen, contact spark throbs)
+         runs reliably. Source of truth mirrored in assets/cubist-hero.svg. -->
+    <svg class="hero-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img"
+         aria-label="A cubist illustration: a fragmented laptop with an angular hand reaching in from the right, fingertip nearly touching a bright spark on the screen — a modernist echo of the Creation of Adam.">
+      <defs>
+        <style>
+          .e { stroke:#1c1a17; stroke-width:5; stroke-linejoin:round; stroke-linecap:round; }
+          .m { stroke:#1c1a17; stroke-width:3; stroke-linejoin:round; stroke-linecap:round; }
+          .t { stroke:#1c1a17; stroke-width:2; stroke-linejoin:round; }
+
+          /* One 9s loop: reach in, tap three keys, withdraw, then the screen
+             bursts with light. Reduced-motion falls back to a static scene
+             (hand resting over the keys, no rays). */
+          .hand-pos { transform: translate(-48px, 188px); }
+          .hand { transform-box: fill-box; transform-origin: 96% 42%;
+                  animation: sequence 9s ease-in-out infinite; }
+          .spark { transform-box: fill-box; transform-origin: center;
+                   animation: throb 2.4s ease-in-out infinite; }
+          .keyA { animation: pressA 9s ease infinite; }
+          .keyB { animation: pressB 9s ease infinite; }
+          .keyC { animation: pressC 9s ease infinite; }
+          .rays { transform-box: fill-box; transform-origin: center; opacity: 0;
+                  animation: burst 9s ease-in-out infinite; }
+          .flash { opacity: 0; animation: flash 9s ease-in-out infinite; }
+
+          @keyframes sequence {
+            0%   { transform: translateX(100%) translateY(-4%); }
+            12%  { transform: translateX(0) translateY(0) rotate(0deg); }
+            21%  { transform: translateX(0) translateY(5%) rotate(1.6deg); }
+            25%  { transform: translateX(0) translateY(0) rotate(0deg); }
+            29%  { transform: translateX(0) translateY(5%) rotate(1.6deg); }
+            33%  { transform: translateX(0) translateY(0) rotate(0deg); }
+            37%  { transform: translateX(0) translateY(5%) rotate(1.6deg); }
+            41%  { transform: translateX(0) translateY(0) rotate(0deg); }
+            46%  { transform: translateX(0) translateY(0); }
+            57%  { transform: translateX(100%) translateY(-4%); }
+            100% { transform: translateX(100%) translateY(-4%); }
+          }
+          @keyframes pressA { 0%,19% { fill:#f2ebd8; } 21% { fill:#e6c25f; } 25%,100% { fill:#f2ebd8; } }
+          @keyframes pressB { 0%,27% { fill:#f2ebd8; } 29% { fill:#e6c25f; } 33%,100% { fill:#f2ebd8; } }
+          @keyframes pressC { 0%,35% { fill:#f2ebd8; } 37% { fill:#e6c25f; } 41%,100% { fill:#f2ebd8; } }
+          @keyframes throb { 0%,100% { transform: scale(1); opacity: 1; }
+                             50% { transform: scale(1.16); opacity: 0.62; } }
+          @keyframes burst {
+            0%,53% { opacity: 0; transform: scale(0.12); }
+            59%    { opacity: 1; transform: scale(0.85); }
+            69%    { opacity: 1; transform: scale(1.3) rotate(8deg); }
+            85%    { opacity: 0; transform: scale(1.9) rotate(18deg); }
+            100%   { opacity: 0; transform: scale(0.12); }
+          }
+          @keyframes flash {
+            0%,58% { opacity: 0; }
+            64%    { opacity: 0.92; }
+            72%    { opacity: 0.4; }
+            84%    { opacity: 0; }
+            100%   { opacity: 0; }
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            .hand, .spark, .keyA, .keyB, .keyC, .rays, .flash { animation: none; }
+            .rays, .flash { opacity: 0; }
+          }
+        </style>
+        <filter id="grain" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="n"/>
+          <feColorMatrix in="n" type="saturate" values="0"/>
+        </filter>
+        <radialGradient id="spark" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#f6efdb"/>
+          <stop offset="45%" stop-color="#e6c25f"/>
+          <stop offset="100%" stop-color="#e6c25f" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="bloom" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fff8e6"/>
+          <stop offset="38%" stop-color="#f4d98f" stop-opacity="0.8"/>
+          <stop offset="100%" stop-color="#f4d98f" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <rect width="1200" height="900" fill="#ece0c4"/>
+      <polygon points="0,900 0,455 545,900" fill="#3f5a6b"/>
+      <polygon points="1200,0 1200,375 775,0" fill="#ca9b46"/>
+      <polygon points="0,0 375,0 0,315" fill="#a8492f"/>
+      <polygon points="1200,900 1200,610 815,900" fill="#2c4a44"/>
+      <polygon points="300,250 900,250 940,760 260,720" fill="#f2ebd8" opacity="0.55"/>
+
+      <!-- idea disc: split sun / lightbulb -->
+      <g>
+        <path class="e" d="M250,110 A92,92 0 0,1 250,294 Z" fill="#bd5a38"/>
+        <path class="e" d="M250,110 A92,92 0 0,0 250,294 Z" fill="#f2ebd8"/>
+        <line class="m" x1="250" y1="110" x2="250" y2="294"/>
+        <circle cx="250" cy="202" r="30" fill="#d9b25a" class="m"/>
+        <g class="m">
+          <line x1="250" y1="52" x2="250" y2="86"/>
+          <line x1="152" y1="120" x2="176" y2="140"/>
+          <line x1="348" y1="120" x2="324" y2="140"/>
+          <line x1="126" y1="202" x2="158" y2="202"/>
+        </g>
+      </g>
+
+      <!-- laptop -->
+      <polygon class="e" points="380,300 790,262 782,610 372,578" fill="#557488"/>
+      <polygon class="m" points="380,300 585,281 578,595 372,578" fill="#3f5a6b"/>
+      <polygon class="m" points="585,281 790,262 782,610 578,595" fill="#6d90a1"/>
+      <polygon class="m" points="452,360 700,338 694,520 448,540" fill="#2c4a44"/>
+      <polygon class="m" points="452,360 560,350 555,528 448,540" fill="#ca9b46"/>
+      <polygon class="t" points="560,350 700,338 694,520 555,528" fill="#35564f"/>
+      <line class="m" x1="578" y1="281" x2="571" y2="595"/>
+
+      <!-- contact spark -->
+      <g class="spark">
+        <circle cx="612" cy="452" r="66" fill="url(#spark)"/>
+        <polygon class="m" points="612,404 628,446 612,452 596,446" fill="#f6efdb"/>
+        <polygon class="m" points="612,452 628,446 640,470 612,478" fill="#e6c25f"/>
+        <polygon class="m" points="612,452 596,446 584,470 612,478" fill="#f2ebd8"/>
+      </g>
+
+      <!-- keyboard deck -->
+      <polygon class="e" points="372,578 782,610 858,742 420,712" fill="#d9b25a"/>
+      <polygon class="m" points="372,578 782,610 762,648 388,616" fill="#b8933f"/>
+      <g fill="#f2ebd8" class="t">
+        <polygon class="keyB" points="426,636 476,640 469,660 419,655"/>
+        <polygon class="keyA" points="494,641 544,645 537,665 487,660"/>
+        <polygon class="keyC" points="562,646 612,650 605,670 555,665"/>
+        <polygon points="630,651 680,655 673,675 623,670"/>
+        <polygon points="698,655 748,659 741,679 691,674"/>
+        <polygon points="446,672 496,676 489,697 439,692" fill="#a8492f"/>
+        <polygon points="514,677 564,681 557,702 507,697"/>
+        <polygon points="582,682 632,686 625,707 575,702"/>
+        <polygon points="650,686 700,690 693,711 643,706"/>
+        <polygon points="718,690 768,694 761,715 711,710" fill="#3f5a6b"/>
+        <polygon points="470,708 640,720 632,742 462,730" fill="#ece0c4"/>
+      </g>
+
+      <!-- reaching hand: forearm, narrow wrist, wide palm, thumb, and four
+           fanned fingers. .hand-pos parks it over the keyboard; .hand animates. -->
+      <g class="hand-pos"><g class="hand">
+        <!-- forearm -->
+        <polygon class="e" points="1200,330 900,380 905,450 1200,445" fill="#c17a4a"/>
+        <polygon class="m" points="1200,445 905,450 910,520 1200,560" fill="#a8623a"/>
+        <!-- back of the hand (wider than the wrist) -->
+        <polygon class="e" points="900,380 760,362 765,452 905,450" fill="#e0a173"/>
+        <polygon class="m" points="905,450 765,452 770,545 910,520" fill="#c98a55"/>
+        <!-- thumb -->
+        <polygon class="m" points="892,384 844,372 810,340 860,358" fill="#d98a5a"/>
+        <!-- index finger (longest, reaching the spark) -->
+        <polygon class="m" points="760,368 762,410 636,424 642,382" fill="#e0a173"/>
+        <polygon class="m" points="642,382 636,424 548,434 557,402" fill="#e7b183"/>
+        <!-- middle finger -->
+        <polygon class="m" points="762,414 763,452 650,462 644,424" fill="#d98a5a"/>
+        <polygon class="m" points="644,424 650,462 582,474 590,438" fill="#e0a173"/>
+        <!-- ring finger -->
+        <polygon class="m" points="763,456 765,494 664,502 658,464" fill="#e0a173"/>
+        <polygon class="m" points="658,464 664,502 620,510 626,476" fill="#d98a5a"/>
+        <!-- little finger -->
+        <polygon class="m" points="765,498 768,536 690,542 684,506" fill="#d98a5a"/>
+        <polygon class="m" points="684,506 690,542 656,546 660,516" fill="#e7b183"/>
+      </g></g>
+
+      <!-- tension lines -->
+      <g class="m" fill="none" opacity="0.9">
+        <line x1="548" y1="430" x2="592" y2="448"/>
+        <line x1="372" y1="578" x2="250" y2="294"/>
+      </g>
+
+      <!-- burst of light from the screen (after the hand withdraws) -->
+      <g class="rays">
+        <circle cx="600" cy="430" r="185" fill="url(#bloom)"/>
+        <polygon points="622,430 780,438 780,422" fill="#fdf3d8"/>
+        <polygon points="620,440 712,493 719,478" fill="#f0c860"/>
+        <polygon points="614,447 706,576 718,566" fill="#fdf3d8"/>
+        <polygon points="605,451 621,557 636,553" fill="#f0c860"/>
+        <polygon points="595,451 552,604 568,607" fill="#fdf3d8"/>
+        <polygon points="586,447 514,525 526,535" fill="#f0c860"/>
+        <polygon points="580,440 434,501 441,515" fill="#fdf3d8"/>
+        <polygon points="578,430 472,422 472,438" fill="#f0c860"/>
+        <polygon points="580,420 441,345 434,359" fill="#fdf3d8"/>
+        <polygon points="586,413 526,325 514,335" fill="#f0c860"/>
+        <polygon points="595,409 568,253 552,256" fill="#fdf3d8"/>
+        <polygon points="605,409 636,307 621,303" fill="#f0c860"/>
+        <polygon points="614,413 718,294 706,284" fill="#fdf3d8"/>
+        <polygon points="620,420 719,382 712,367" fill="#f0c860"/>
+        <circle cx="600" cy="430" r="32" fill="#fff8e6"/>
+      </g>
+
+      <!-- screenprint grain -->
+      <rect width="1200" height="900" filter="url(#grain)" opacity="0.10" style="mix-blend-mode:multiply"/>
+
+      <!-- screen-filling flash at the peak of the burst -->
+      <rect class="flash" width="1200" height="900" fill="#fff8e6"/>
+    </svg>
+  </figure>
+
+  <p class="tagline">Something new is nearly within reach.</p>
+  <a class="contact" href="mailto:alfred@alfred.io">alfred@alfred.io</a>
+</main>
