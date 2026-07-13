@@ -52,19 +52,11 @@ body {
 
 /* ---- Meta row --------------------------------------------------------- */
 
+/* top rule above the wordmark (the corner mark was removed) */
 .meta {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  font-size: clamp(0.66rem, 1.4vw, 0.82rem);
-  font-weight: 700;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
   padding-bottom: clamp(0.6rem, 1.6vh, 1rem);
   border-bottom: 2px solid var(--ink);
 }
-
-.meta__year { color: var(--terracotta); }
 
 /* ---- Wordmark --------------------------------------------------------- */
 
